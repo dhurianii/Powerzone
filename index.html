@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PowerZone Fitness | Train Hard. Live Strong.</title>
+  <meta name="description" content="Mumbai's most results-driven fitness studio. Book your free trial today." />
+
+  <!-- Google Fonts: Bebas Neue (headings) + DM Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============================================================
+       SECTION 1: NAVBAR
+       - Logo on left, nav links in center, CTA button on right
+       - Becomes sticky + dark background after scrolling 80px
+       - Hamburger icon shown on mobile (toggled via JS)
+  ============================================================ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+
+      <!-- Logo -->
+      <a href="#home" class="nav-logo">
+        POWER<span>ZONE</span>
+      </a>
+
+      <!-- Desktop nav links -->
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home"      class="nav-link">Home</a></li>
+        <li><a href="#plans"     class="nav-link">Plans</a></li>
+        <li><a href="#trainers"  class="nav-link">Trainers</a></li>
+        <li><a href="#gallery"   class="nav-link">Gallery</a></li>
+        <li><a href="#contact"   class="nav-link">Contact</a></li>
+      </ul>
+
+      <!-- CTA Button -->
+      <a href="#contact" class="btn-neon nav-cta">Book Free Trial</a>
+
+      <!-- Hamburger (mobile only) — JS toggles .open on nav-links -->
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+  </nav>
+
+
+  <!-- ============================================================
+       SECTION 2: HERO
+       - Full-screen dark bg with overlay on gym image
+       - Big headline, subtext, two CTA buttons
+       - Scroll-down arrow bounces via CSS animation
+  ============================================================ -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">Mumbai's #1 Fitness Studio</p>
+      <h1 class="hero-title">
+        Train Hard.<br />
+        <span class="neon-text">Live Strong.</span>
+      </h1>
+      <p class="hero-sub">
+        Transform your body. Build real strength. Join 500+ members who already made the switch.
+      </p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-neon">Book Free Trial</a>
+        <a href="#plans"   class="btn-outline">See Plans</a>
+      </div>
+    </div>
+
+    <!-- Scroll arrow at the bottom -->
+    <a href="#plans" class="scroll-arrow" aria-label="Scroll down">&#8595;</a>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 3: STATS BAR
+       - 4 quick numbers that build trust instantly
+       - Simple dark bar between hero and plans
+  ============================================================ -->
+  <section class="stats-bar">
+    <div class="stats-container">
+      <div class="stat-item">
+        <span class="stat-num neon-text">500+</span>
+        <span class="stat-label">Active Members</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num neon-text">8</span>
+        <span class="stat-label">Expert Trainers</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num neon-text">6AM–11PM</span>
+        <span class="stat-label">Open Daily</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num neon-text">5★</span>
+        <span class="stat-label">Google Rating</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 4: MEMBERSHIP PLANS
+       - 3 cards: Basic, Pro (highlighted), Elite
+       - Middle card has neon border + "Most Popular" badge
+       - Each "Join Now" button opens WhatsApp via JS
+  ============================================================ -->
+  <section class="plans" id="plans">
+    <div class="section-container">
+      <p class="section-eyebrow">Membership Plans</p>
+      <h2 class="section-title">Choose Your <span class="neon-text">Power Level</span></h2>
+      <p class="section-sub">No hidden fees. Cancel anytime. First trial is always free.</p>
+
+      <div class="plans-grid">
+
+        <!-- Basic Plan -->
+        <div class="plan-card">
+          <div class="plan-header">
+            <h3 class="plan-name">Basic</h3>
+            <div class="plan-price">
+              <span class="price-currency">₹</span>
+              <span class="price-amount">1,499</span>
+              <span class="price-period">/mo</span>
+            </div>
+          </div>
+          <ul class="plan-features">
+            <li>✓ Gym floor access</li>
+            <li>✓ Locker room</li>
+            <li>✓ 1 group class/week</li>
+            <li>✓ Fitness assessment</li>
+            <li class="disabled">✗ Personal trainer</li>
+            <li class="disabled">✗ Diet consultation</li>
+          </ul>
+          <!-- data-plan used by JS to pre-fill WhatsApp message -->
+          <button class="btn-outline plan-btn" data-plan="Basic ₹1499/mo">Join Now</button>
+        </div>
+
+        <!-- Pro Plan (Most Popular) -->
+        <div class="plan-card plan-featured">
+          <div class="plan-badge">Most Popular</div>
+          <div class="plan-header">
+            <h3 class="plan-name">Pro</h3>
+            <div class="plan-price">
+              <span class="price-currency">₹</span>
+              <span class="price-amount">2,499</span>
+              <span class="price-period">/mo</span>
+            </div>
+          </div>
+          <ul class="plan-features">
+            <li>✓ Gym floor access</li>
+            <li>✓ Locker room</li>
+            <li>✓ Unlimited group classes</li>
+            <li>✓ Fitness assessment</li>
+            <li>✓ 2 PT sessions/month</li>
+            <li class="disabled">✗ Diet consultation</li>
+          </ul>
+          <button class="btn-neon plan-btn" data-plan="Pro ₹2499/mo">Join Now</button>
+        </div>
+
+        <!-- Elite Plan -->
+        <div class="plan-card">
+          <div class="plan-header">
+            <h3 class="plan-name">Elite</h3>
+            <div class="plan-price">
+              <span class="price-currency">₹</span>
+              <span class="price-amount">3,999</span>
+              <span class="price-period">/mo</span>
+            </div>
+          </div>
+          <ul class="plan-features">
+            <li>✓ Gym floor access</li>
+            <li>✓ Locker room</li>
+            <li>✓ Unlimited group classes</li>
+            <li>✓ Fitness assessment</li>
+            <li>✓ 8 PT sessions/month</li>
+            <li>✓ Diet consultation</li>
+          </ul>
+          <button class="btn-outline plan-btn" data-plan="Elite ₹3999/mo">Join Now</button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 5: TRAINERS
+       - 3 trainer cards with photo, name, specialty, experience
+       - Photos from Unsplash (free, no signup needed)
+       - Hover lifts the card with neon glow
+  ============================================================ -->
+  <section class="trainers" id="trainers">
+    <div class="section-container">
+      <p class="section-eyebrow">Our Coaches</p>
+      <h2 class="section-title">Train With <span class="neon-text">The Best</span></h2>
+      <p class="section-sub">Certified professionals who live and breathe fitness.</p>
+
+      <div class="trainers-grid">
+
+        <div class="trainer-card">
+          <!-- Unsplash direct image URL — free, no login needed -->
+          <div class="trainer-img-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&h=400&fit=crop&crop=face"
+              alt="Trainer Arjun Singh"
+              class="trainer-img"
+            />
+          </div>
+          <div class="trainer-info">
+            <h3 class="trainer-name">Arjun Singh</h3>
+            <p class="trainer-specialty neon-text">Strength & Conditioning</p>
+            <p class="trainer-exp">8 years experience</p>
+          </div>
+        </div>
+
+        <div class="trainer-card">
+          <div class="trainer-img-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=400&fit=crop&crop=face"
+              alt="Trainer Priya Sharma"
+              class="trainer-img"
+            />
+          </div>
+          <div class="trainer-info">
+            <h3 class="trainer-name">Priya Sharma</h3>
+            <p class="trainer-specialty neon-text">Yoga & Flexibility</p>
+            <p class="trainer-exp">5 years experience</p>
+          </div>
+        </div>
+
+        <div class="trainer-card">
+          <div class="trainer-img-wrap">
+            <img
+              src="https://images.unsplash.com/photo-1597452485669-2c7bb5fef90d?w=400&h=400&fit=crop&crop=face"
+              alt="Trainer Rohan Mehta"
+              class="trainer-img"
+            />
+          </div>
+          <div class="trainer-info">
+            <h3 class="trainer-name">Rohan Mehta</h3>
+            <p class="trainer-specialty neon-text">HIIT & Weight Loss</p>
+            <p class="trainer-exp">6 years experience</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 6: GALLERY
+       - 6 gym photos in a CSS grid
+       - Clicking any photo opens a lightbox overlay (built in JS)
+       - data-full attribute holds full-size image URL for lightbox
+  ============================================================ -->
+  <section class="gallery" id="gallery">
+    <div class="section-container">
+      <p class="section-eyebrow">Inside PowerZone</p>
+      <h2 class="section-title">Our <span class="neon-text">Facility</span></h2>
+      <p class="section-sub">State-of-the-art equipment. Clean. Energetic. Built for results.</p>
+
+      <div class="gallery-grid">
+        <div class="gallery-item" data-full="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200">
+          <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=600&h=400&fit=crop" alt="Gym floor" />
+          <div class="gallery-overlay"><span>&#128269;</span></div>
+        </div>
+        <div class="gallery-item" data-full="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=1200">
+          <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=600&h=400&fit=crop" alt="Weight training" />
+          <div class="gallery-overlay"><span>&#128269;</span></div>
+        </div>
+        <div class="gallery-item" data-full="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1200">
+          <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&h=400&fit=crop" alt="Cardio zone" />
+          <div class="gallery-overlay"><span>&#128269;</span></div>
+        </div>
+        <div class="gallery-item" data-full="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=1200">
+          <img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=600&h=400&fit=crop" alt="Training session" />
+          <div class="gallery-overlay"><span>&#128269;</span></div>
+        </div>
+        <div class="gallery-item" data-full="https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=1200">
+          <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?w=600&h=400&fit=crop" alt="Group class" />
+          <div class="gallery-overlay"><span>&#128269;</span></div>
+        </div>
+        <div class="gallery-item" data-full="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=1200">
+          <img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=600&h=400&fit=crop" alt="Dumbbells" />
+          <div class="gallery-overlay"><span>&#128269;</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox overlay — hidden by default, shown by JS on gallery click -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose">&#10005;</button>
+    <img src="" alt="Full size" class="lightbox-img" id="lightboxImg" />
+  </div>
+
+
+  <!-- ============================================================
+       SECTION 7: TESTIMONIALS
+       - 3 member review cards with star rating and quote
+       - Carousel auto-scrolls on mobile via JS
+  ============================================================ -->
+  <section class="testimonials" id="testimonials">
+    <div class="section-container">
+      <p class="section-eyebrow">Member Results</p>
+      <h2 class="section-title">Real People. <span class="neon-text">Real Results.</span></h2>
+
+      <div class="testimonials-grid" id="testimonialsGrid">
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">
+            "Lost 14kg in 4 months. Arjun's training plan was the most structured I've ever followed. PowerZone is not just a gym — it's a lifestyle."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">RS</div>
+            <div>
+              <p class="author-name">Rahul Sharma</p>
+              <p class="author-meta">Member since 2023</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">
+            "As a working mom, I needed flexible timings and real results. PowerZone's 6AM batch changed my life. Down 8kg, energy through the roof."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">NP</div>
+            <div>
+              <p class="author-name">Neha Patil</p>
+              <p class="author-meta">Member since 2022</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p class="testimonial-text">
+            "I tried 3 gyms before PowerZone. The difference? The trainers actually know what they're doing. Gained 6kg of muscle in 5 months."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">AK</div>
+            <div>
+              <p class="author-name">Aditya Kumar</p>
+              <p class="author-meta">Member since 2024</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SECTION 8: WHATSAPP LEAD FORM + CONTACT + MAP
+       - Name, Phone, Goal fields
+       - JS grabs values and builds a wa.me URL, opens in new tab
+       - Google Maps embed below (free iframe, no API key needed)
+       - Footer at the very bottom
+  ============================================================ -->
+  <section class="contact" id="contact">
+    <div class="section-container">
+      <p class="section-eyebrow">Get Started</p>
+      <h2 class="section-title">Book Your <span class="neon-text">Free Trial</span></h2>
+      <p class="section-sub">Fill this in and we'll WhatsApp you within the hour.</p>
+
+      <div class="contact-grid">
+
+        <!-- Lead Form -->
+        <div class="contact-form-wrap">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" placeholder="Rahul Sharma" />
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" placeholder="98765 43210" />
+          </div>
+          <div class="form-group">
+            <label for="goal">Your Goal</label>
+            <!-- JS reads this value to customise the WhatsApp message -->
+            <select id="goal">
+              <option value="Weight Loss">Weight Loss</option>
+              <option value="Muscle Gain">Muscle Gain</option>
+              <option value="General Fitness">General Fitness</option>
+              <option value="Athletic Performance">Athletic Performance</option>
+            </select>
+          </div>
+          <!-- JS handles this button click — see script.js sendToWhatsApp() -->
+          <button class="btn-neon form-submit" id="submitBtn">
+            Send on WhatsApp &#128172;
+          </button>
+          <p class="form-note">We reply within 1 hour. No spam, ever.</p>
+        </div>
+
+        <!-- Contact Info + Map -->
+        <div class="contact-info-wrap">
+          <div class="contact-details">
+            <div class="contact-item">
+              <span class="contact-icon">&#128205;</span>
+              <div>
+                <p class="contact-label">Address</p>
+                <p class="contact-value">Shop 4, Fitness Complex, Andheri West, Mumbai 400053</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">&#128222;</span>
+              <div>
+                <p class="contact-label">Phone</p>
+                <p class="contact-value">+91 98765 43210</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <span class="contact-icon">&#9201;</span>
+              <div>
+                <p class="contact-label">Hours</p>
+                <p class="contact-value">Mon–Sat: 6AM – 11PM<br/>Sunday: 7AM – 8PM</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Google Maps embed — free iframe, no API key needed -->
+          <!-- Replace the src URL with the real gym's embed URL later -->
+          <div class="map-wrap">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.0!2d72.8311!3d19.1365!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDA4JzExLjQiTiA3MsKwNDknNTIuMCJF!5e0!3m2!1sen!2sin!4v1"
+              width="100%"
+              height="200"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              title="PowerZone Fitness Location"
+            ></iframe>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FOOTER
+       - Simple 2-line footer
+       - "Website by CodeArtist" — your brand link on every client site
+  ============================================================ -->
+  <footer class="footer">
+    <p class="footer-copy">&copy; 2026 PowerZone Fitness. All rights reserved.</p>
+    <p class="footer-credit">
+      Website by <a href="#" class="neon-text">CodeArtist</a>
+    </p>
+  </footer>
+
+
+  <!-- JS file loaded at the bottom so HTML is parsed first -->
+  <script src="script.js"></script>
+
+</body>
+</html>
