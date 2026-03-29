@@ -105,7 +105,7 @@ sections.forEach(section => navObserver.observe(section));
 ────────────────────────────────────────────── */
 
 // ⚠️ CHANGE THIS to the gym's real WhatsApp number
-const GYM_WHATSAPP = '919876543210';
+const GYM_WHATSAPP = '919137079995';
 
 const submitBtn = document.getElementById('submitBtn');
 
