@@ -112,7 +112,11 @@ const submitBtn = document.getElementById('submitBtn');
 function sendToWhatsApp() {
   // Get values from form fields
   const name  = document.getElementById('name').value.trim();
-  const phone = document.getElementById('phone').value.trim();
+  let phone = document.getElementById('phone').value.trim();
+
+// Remove all non-numeric characters
+phone = phone.replace(/\D/g, '');
+   
   const goal  = document.getElementById('goal').value;
 
   // Basic validation — don't send if fields are empty
@@ -120,9 +124,9 @@ function sendToWhatsApp() {
     showFormError('Please enter your name');
     return;
   }
-  if (!phone) {
-    showFormError('Please enter your phone number');
-    return;
+  if (phone.length < 10) {
+  showFormError('Please enter a valid phone number');
+  return;
   }
 
   // Build the pre-filled WhatsApp message
