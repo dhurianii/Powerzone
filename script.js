@@ -90,103 +90,146 @@ sections.forEach(section => navObserver.observe(section));
 
 
 /* ─────────────────────────────────────────────
-   3. WHATSAPP LEAD FORM
+   3. WHATSAPP LEAD FORM — v2
    
-   What it does:
-   - Reads Name, Phone, and Goal from the form fields
-   - Validates they are not empty
-   - Builds a wa.me URL with a pre-filled message
-   - Opens WhatsApp in a new tab
+   CHANGES FROM v1:
+   - Full per-field validation (name min 2 chars,
+     phone exactly 10 digits, numeric only)
+   - Phone auto-strips non-numeric characters on input
+   - Inline error messages (no alert())
+   - [NEW] Instagram handle field (optional)
+   - [NEW] Free call checkbox
+   - [NEW] Updated WhatsApp message includes all fields
+   - [NEW] Success message shown on valid submit
+   - Button disabled for 2s after click (spam prevention)
 
    HOW TO CUSTOMISE:
-   Change the phone number below to the real gym's
-   WhatsApp number (include country code, no + or spaces)
-   Example: India +91 98765 43210 → 919876543210
+   Change GYM_WHATSAPP to the real gym's number
+   (country code + number, no + or spaces)
+   Example: +91 98765 43210 → 919876543210
 ────────────────────────────────────────────── */
 
 // ⚠️ CHANGE THIS to the gym's real WhatsApp number
-const GYM_WHATSAPP = '919137079995';
+const GYM_WHATSAPP = '919876543210';
 
 const submitBtn = document.getElementById('submitBtn');
 
+/* ── PHONE: strip non-numeric characters as user types ── */
+document.getElementById('phone')?.addEventListener('input', (e) => {
+  // Remove anything that isn't 0-9
+  e.target.value = e.target.value.replace(/\D/g, '');
+});
+
+/* ── VALIDATION HELPERS ── */
+
+// Show an error on a specific field
+// fieldId: the input's id | message: string to display
+function showFieldError(fieldId, message) {
+  const input = document.getElementById(fieldId);
+  const errorEl = document.getElementById(fieldId + '-error');
+  if (!input || !errorEl) return;
+
+  input.classList.add('input-error');       // Red border on input
+  errorEl.textContent = message;
+  errorEl.classList.add('visible');         // Fade in via CSS transition
+}
+
+// Clear error from a specific field
+function clearFieldError(fieldId) {
+  const input = document.getElementById(fieldId);
+  const errorEl = document.getElementById(fieldId + '-error');
+  if (!input || !errorEl) return;
+
+  input.classList.remove('input-error');
+  errorEl.textContent = '';
+  errorEl.classList.remove('visible');
+}
+
+// Clear errors as user types (better UX — error disappears immediately)
+['name', 'phone'].forEach(id => {
+  document.getElementById(id)?.addEventListener('input', () => clearFieldError(id));
+});
+
+/* ── MAIN SUBMIT FUNCTION ── */
 function sendToWhatsApp() {
-  // Get values from form fields
-  const name  = document.getElementById('name').value.trim();
-  let phone = document.getElementById('phone').value.trim();
+  // Read all field values
+  const name      = document.getElementById('name').value.trim();
+  const phone     = document.getElementById('phone').value.replace(/\D/g, ''); // Extra safety: strip non-digits
+  const goal      = document.getElementById('goal').value;
+  const instagram = document.getElementById('instagram')?.value.trim() || '';
+  const freeCall  = document.getElementById('freeCall')?.checked || false;
 
-// Remove all non-numeric characters
-phone = phone.replace(/\D/g, '');
-   
-  const goal  = document.getElementById('goal').value;
+  // Track whether any field failed validation
+  let isValid = true;
 
-  // Basic validation — don't send if fields are empty
+  // ── Validate: Name ──
   if (!name) {
-    showFormError('Please enter your name');
-    return;
-  }
-  if (phone.length < 10) {
-  showFormError('Please enter a valid phone number');
-  return;
+    showFieldError('name', 'Please enter your name.');
+    isValid = false;
+  } else if (name.length < 2) {
+    showFieldError('name', 'Name must be at least 2 characters.');
+    isValid = false;
+  } else {
+    clearFieldError('name');
   }
 
-  // Build the pre-filled WhatsApp message
-  // encodeURIComponent converts spaces and special chars to URL-safe format
-  const message = encodeURIComponent(
+  // ── Validate: Phone ──
+  if (!phone) {
+    showFieldError('phone', 'Please enter your phone number.');
+    isValid = false;
+  } else if (phone.length !== 10) {
+    showFieldError('phone', `Phone must be exactly 10 digits (you entered ${phone.length}).`);
+    isValid = false;
+  } else {
+    clearFieldError('phone');
+  }
+
+  // Stop here if any field failed
+  if (!isValid) return;
+
+  // ── Build WhatsApp message ──
+  // Each line only appears if the field has a value
+  const waMessage = encodeURIComponent(
     `Hi PowerZone Fitness! 👋\n\n` +
     `I'd like to book a FREE TRIAL.\n\n` +
     `Name: ${name}\n` +
-    `Phone: ${phone}\n` +
-    `Goal: ${goal}\n\n` +
+    `Phone: +91 ${phone}\n` +
+    `Goal: ${goal}\n` +
+    (instagram ? `Instagram: ${instagram}\n` : '') +           // [NEW] only if filled
+    `Free Call Requested: ${freeCall ? 'Yes ✅' : 'No'}\n\n` + // [NEW] always included
     `Please let me know the next available slot!`
   );
 
-  // Build the full WhatsApp URL
-  const waURL = `https://wa.me/${GYM_WHATSAPP}?text=${message}`;
+  // Open WhatsApp
+  window.open(`https://wa.me/${GYM_WHATSAPP}?text=${waMessage}`, '_blank');
 
-  // Open in new tab (works on mobile too — opens WhatsApp app)
-  window.open(waURL, '_blank');
+  // ── UX: disable button for 2s (spam prevention) ──
+  submitBtn.disabled = true;
+  submitBtn.style.opacity = '0.7';
+  submitBtn.textContent = '✓ Opening WhatsApp…';
 
-  // Show success feedback on the button
-  submitBtn.textContent = '✓ Opening WhatsApp...';
-  submitBtn.style.background = '#27cc0e';
+  // [NEW] Show success message below button
+  const successEl = document.getElementById('formSuccess');
+  if (successEl) successEl.style.display = 'block';
 
-  // Reset button after 3 seconds
+  // Re-enable button after 2 seconds
   setTimeout(() => {
-    submitBtn.textContent = 'Send on WhatsApp 💬';
-    submitBtn.style.background = '';
-  }, 3000);
+    submitBtn.disabled = false;
+    submitBtn.style.opacity = '';
+    submitBtn.innerHTML = 'Send on WhatsApp &#128172;';
+  }, 2000);
 }
 
-// Helper: show a quick error message below the button
-function showFormError(message) {
-  // Remove any existing error first
-  const existing = document.querySelector('.form-error');
-  if (existing) existing.remove();
-
-  const error = document.createElement('p');
-  error.className = 'form-error';
-  error.textContent = message;
-  error.style.cssText = `
-    color: #ff4444;
-    font-size: 13px;
-    text-align: center;
-    margin-top: -12px;
-  `;
-
-  submitBtn.parentNode.insertBefore(error, submitBtn.nextSibling);
-
-  // Auto-remove error after 3 seconds
-  setTimeout(() => error.remove(), 3000);
-}
-
-// Attach click handler to the submit button
+// Attach click handler
 if (submitBtn) {
   submitBtn.addEventListener('click', sendToWhatsApp);
 }
 
-// Also allow pressing Enter in phone field to submit
-document.getElementById('phone')?.addEventListener('keypress', (e) => {
-  if (e.key === 'Enter') sendToWhatsApp();
+// Submit on Enter key in phone or instagram field
+['phone', 'instagram'].forEach(id => {
+  document.getElementById(id)?.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') sendToWhatsApp();
+  });
 });
 
 
