@@ -380,18 +380,37 @@
 
       <div class="contact-grid">
 
-        <!-- Lead Form -->
+        <!-- ============================================================
+             LEAD FORM — UPDATED v2
+             Changes from original:
+             - Proper per-field validation with inline error messages
+             - Phone: numeric only, stripped of non-digits, 10-digit check
+             - [NEW] Instagram handle field (optional)
+             - [NEW] Free call checkbox
+             - [NEW] Success message shown after submit
+             - Button disabled for 2s after click (spam prevention)
+        ============================================================ -->
         <div class="contact-form-wrap">
+
+          <!-- Name — min 2 chars required -->
           <div class="form-group">
             <label for="name">Your Name</label>
-            <input type="text" id="name" placeholder="Rahul Sharma" />
+            <input type="text" id="name" placeholder="Rahul Sharma" autocomplete="name" />
+            <!-- Error slot: empty by default, JS fills + shows it on validation fail -->
+            <span class="field-error" id="name-error"></span>
           </div>
+
+          <!-- Phone — 10 digits required, JS strips non-numeric on input -->
           <div class="form-group">
             <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" pattern="[0-9]{10}" required>
+            <input type="tel" id="phone" placeholder="98765 43210"
+                   inputmode="numeric" maxlength="10" autocomplete="tel" />
+            <span class="field-error" id="phone-error"></span>
+          </div>
+
+          <!-- Goal — unchanged -->
           <div class="form-group">
             <label for="goal">Your Goal</label>
-            <!-- JS reads this value to customise the WhatsApp message -->
             <select id="goal">
               <option value="Weight Loss">Weight Loss</option>
               <option value="Muscle Gain">Muscle Gain</option>
@@ -399,11 +418,36 @@
               <option value="Athletic Performance">Athletic Performance</option>
             </select>
           </div>
-          <!-- JS handles this button click — see script.js sendToWhatsApp() -->
+
+          <!-- [NEW] Instagram handle — optional -->
+          <div class="form-group">
+            <label for="instagram">
+              Instagram Handle
+              <span class="label-optional">(optional)</span>
+            </label>
+            <input type="text" id="instagram" placeholder="@yourusername" autocomplete="off" />
+          </div>
+
+          <!-- [NEW] Free call checkbox -->
+          <div class="form-group form-group--checkbox">
+            <label class="checkbox-label">
+              <input type="checkbox" id="freeCall" />
+              <span class="checkbox-custom"></span>
+              Request a free call from our trainer
+            </label>
+          </div>
+
+          <!-- Submit — disabled by JS for 2s after click -->
           <button class="btn-neon form-submit" id="submitBtn">
             Send on WhatsApp &#128172;
           </button>
-          <p class="form-note">We reply within 1 hour. No spam, ever.</p>
+
+          <!-- [NEW] Success message — hidden until valid submit -->
+          <p class="form-success" id="formSuccess">
+            ✓ Opening WhatsApp&hellip; We'll reply within 1 hour!
+          </p>
+
+          <p class="form-note">No spam, ever. We reply within 1 hour.</p>
         </div>
 
         <!-- Contact Info + Map -->
